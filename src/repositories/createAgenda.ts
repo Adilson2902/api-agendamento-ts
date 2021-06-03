@@ -174,7 +174,8 @@ export class CriaAgenda implements AgendaFunctions{
                      postcode:"",
                      zone:""
                  },
-                 marked:false
+                 marked:false,
+                 clinica:""
            } 
  
         }
@@ -187,7 +188,11 @@ export class CriaAgenda implements AgendaFunctions{
 
        array[i] = {
         dia:i,
-
+        QuantidadeVacinaClinica:"",
+        QuantidadeVacinaExpress:"",
+        QuantidadeVacinaHomeCare:"",
+        IntervaloVacina:"",
+        UnidadeClinica:"",
         order_today:arrayorder,
         }
       

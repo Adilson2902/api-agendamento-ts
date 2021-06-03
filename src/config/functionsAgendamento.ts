@@ -2,7 +2,7 @@ import { newAgendamento } from '../repositories/newAgendamento'
 import { CriaAgenda } from '../repositories/createAgenda'
 import { getCEPController } from '../controller/getCEPController'
 import { getLatLongController }  from '../controller/getLatLongController'
-import { createAgendaController } from '../controller/CreateAgendaController'
+import { createAgendaController } from '../controller/createAgendaController'
 
 
 const newAgendamentos = new newAgendamento();
