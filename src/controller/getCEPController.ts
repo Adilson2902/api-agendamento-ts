@@ -25,10 +25,10 @@ export class getCEPController{
         
         } catch (error) {
             
-            response = {
-                "type":"error",
+            response = 
+             
                 error
-            }
+          
 
          
         }

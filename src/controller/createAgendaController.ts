@@ -22,10 +22,10 @@ export  class createAgendaController{
 
         } catch (error) {
             
-            response = {
-                "type":"error",
+            response = 
+             
                 error
-            }
+         
         }
 
         return response;
