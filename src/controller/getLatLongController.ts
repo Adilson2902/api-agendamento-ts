@@ -22,9 +22,10 @@ export  class getLatLongController{
 
         } catch (error) {
             
-            response =
+            response = {
+                "type":"error",
                 error
-            
+            }
         }
 
         return response;
