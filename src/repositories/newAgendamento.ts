@@ -1,6 +1,8 @@
+import {clinics} from '../../models/clinics'
 const axios = require('axios').default;
 import AgendamentoFunction from 'interface/Agendamento';
 require('dotenv').config();
+
 
 
 export class newAgendamento implements AgendamentoFunction{
@@ -47,8 +49,8 @@ export class newAgendamento implements AgendamentoFunction{
 
                response = {
                    "type":"sucess",
-                   "lat": result.geometry.location.lat,
-                   "long":result.geometry.location.lng
+                   "latitude": result.geometry.location.lat,
+                   "longitude":result.geometry.location.lng
                }
 
               
@@ -66,11 +68,61 @@ export class newAgendamento implements AgendamentoFunction{
             return response;
     }
 
+    // calculate distance enter 2 points in earth 
+     async calculateDistance(point1, point2) {
+         var response;
+        /*
+        point1 ={
+            latitude: string,
+            longitude: string
+        } ...
+        */
+        var lt = point1.latitude;
+        var lt1 = point2.latitude;
+        var ln = point1.longitude;
+        var ln1 = point2.longitude;
 
-    async verifyattendance(){
-
-        
-
+        var dLat = (lt - lt1) * Math.PI / 180;
+        var dLon = (ln - ln1) * Math.PI / 180;
+        var a = 0.5 - Math.cos(dLat) / 2 + Math.cos(lt1 * Math.PI / 180) * Math.cos(lt * Math.PI / 180) * (1 - Math.cos(dLon)) / 2;
+        let d = Math.round(6371000 * 2 * Math.asin(Math.sqrt(a)));
+        response = d;
+        return response;
     }
 
+    async verifyLocation (user, clinics) {
+        // return id of clinic most next of user
+        // arguments: user: {}, clinics: [{}]
+        var response;
+        let distances = []
+        let geo = []
+        await clinics.map((clinic) => (
+            distances.push({distance: this.calculateDistance(user, clinic), id: clinic.id})
+        ))
+        await distances.map((item) => (geo.push(item.distance)))
+        // discovering smallest geolocation enter clinics and user
+        let smallestGeo = geo.reduce((a, b) => Math.min(a,b))
+        console.log(smallestGeo)
+    
+        // filter object of clinic most next of user
+        let betterClinicForUser = distances.filter((item) => {return item.distance == smallestGeo})
+    
+        if (betterClinicForUser[0].distance <= 50000){
+            response = betterClinicForUser[0]
+            return response
+        }else{
+            response = {id: 999}
+            return response
+        }
+    }
+
+    async clinicNextUser(cep:string) {
+        let response;
+        let cepUser = await this.getCEP(cep);
+        let geoLocationUser = await this.getLatLong(cep, cepUser.rua, cepUser.bairro, cepUser.uf, cepUser.numero);
+        response = geoLocationUser
+        let idBetterClinic = await this.verifyLocation(geoLocationUser, clinics);
+        // response = idBetterClinic
+        return response
+    }
 }

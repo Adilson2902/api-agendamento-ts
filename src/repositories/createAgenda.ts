@@ -152,6 +152,7 @@ export class CriaAgenda implements AgendaFunctions{
      
          arrayorder[index] = {
             diadasemana:dateaux.getDay(),
+            
              hoursMarked:{
                  hours:hoursAgendadomingo[index].hours,
                  minutes:hoursAgendadomingo[index].minutes
@@ -187,6 +188,7 @@ export class CriaAgenda implements AgendaFunctions{
        
 
        array[i] = {
+        nameMonth,
         dia:i,
         QuantidadeVacinaClinica:"",
         QuantidadeVacinaExpress:"",
@@ -194,6 +196,7 @@ export class CriaAgenda implements AgendaFunctions{
         IntervaloVacina:"",
         UnidadeClinica:"",
         order_today:arrayorder,
+        daymarked:true
         }
       
          

@@ -1,4 +1,4 @@
-import { getCEPControler, getLatLongControler,createAgendaControler } from './config/functionsAgendamento';
+import { getCEPControler, getLatLongControler,createAgendaControler, findClinicControler } from './config/functionsAgendamento';
 import { Response, Request, Router} from 'express';
 
 
@@ -13,7 +13,7 @@ routes.get("/", (req:Request,res:Response) =>{
 })
 
 
-routes.get("/getcep",(req:Request,res:Response) =>{
+routes.post("/getcep",(req:Request,res:Response) =>{
 
     try {
         
@@ -26,7 +26,7 @@ routes.get("/getcep",(req:Request,res:Response) =>{
 
 
 
-routes.get("/getlatlong",(req:Request,res:Response) =>{
+routes.post("/getlatlong",(req:Request,res:Response) =>{
 
     try {
         
@@ -38,7 +38,7 @@ routes.get("/getlatlong",(req:Request,res:Response) =>{
 })
 
 
-routes.get("/createagenda",(req:Request,res:Response) =>{
+routes.post("/createagenda",(req:Request,res:Response) =>{
     try {
         
       
@@ -48,6 +48,17 @@ routes.get("/createagenda",(req:Request,res:Response) =>{
     } catch (error) {
         res.send(error)
     }
+})
+
+routes.post("/encontrar-clinica", (req:Request,res:Response) =>{
+   console.log(req)
+    try {
+        
+        findClinicControler.handle(req,res);
+    } catch (error) {
+        res.send(error)
+    }
+
 })
 
 
