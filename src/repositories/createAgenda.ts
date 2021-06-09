@@ -62,7 +62,7 @@ export class CriaAgenda implements AgendaFunctions{
 
    
 
-    for (let i = date.getDate(); i <= monthlenght.getDate(); i++) {
+    for (let i = 1; i <= monthlenght.getDate(); i++) {
        
       const dateaux = new Date();
       await dateaux.setUTCDate(i);
@@ -200,12 +200,14 @@ export class CriaAgenda implements AgendaFunctions{
         }
       
          
-    await firebase.firestore().collection(`${nameMonth}_Agendamento${date.getFullYear()}_${clinica}`).doc(`${i}`).set(array[i]).then(() =>{
+    await firebase.firestore().collection(`${nameMonth}_Agendamento${date.getFullYear()}_${clinica}`).doc(i < 10 ? `0${i}`: `${i}`).set(array[i]).then(() =>{
    
         response = {
             "type":"sucess",
             "message": `agenda criada na collection ${nameMonth}_Agendamento${date.getFullYear()}_${clinica}`
         }
+
+       
         
     }).catch((err) =>{
           response = {
