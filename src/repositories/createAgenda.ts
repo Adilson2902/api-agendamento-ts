@@ -22,41 +22,41 @@ export class CriaAgenda implements AgendaFunctions{
 
     // mês pro nome da collection
     if(date.getMonth()+1 == 1){
-      nameMonth = "Janeiro";
+      nameMonth = "janeiro";
     }
     if(date.getMonth()+1 == 2){
-        nameMonth = "Fevereiro";
+        nameMonth = "fevereiro";
     }
     if(date.getMonth()+1 == 3){
-        nameMonth = "Março";
+        nameMonth = "março";
     }
     if(date.getMonth()+1 == 4){
-        nameMonth = "Abril";
+        nameMonth = "abril";
     }
     if(date.getMonth()+1 == 5){
-        nameMonth = "Maio";
+        nameMonth = "maio";
     }
     if(date.getMonth()+1 == 6){
-        nameMonth = "Junho";
+        nameMonth = "junho";
     }
     if(date.getMonth()+1 == 7){
-        nameMonth = "Julho";
+        nameMonth = "julho";
     }
     if(date.getMonth()+1 == 8){
-        nameMonth = "Agosto";
+        nameMonth = "agosto";
     }
     if(date.getMonth()+1 == 9){
-        nameMonth = "Setembro";
+        nameMonth = "setembro";
     }
     if(date.getMonth()+1 == 10){
-        nameMonth = "Outubro";
+        nameMonth = "outubro";
     }
 
     if(date.getMonth()+1 == 11){
-        nameMonth = "Novembro";
+        nameMonth = "novembro";
     }
     if(date.getMonth()+1 == 12){
-        nameMonth = "Dezembro";
+        nameMonth = "dezembro";
     }
 
 
@@ -200,11 +200,11 @@ export class CriaAgenda implements AgendaFunctions{
         }
       
          
-    await firebase.firestore().collection(`${nameMonth}_Agendamento${date.getFullYear()}_${clinica}`).doc(i < 10 ? `0${i}`: `${i}`).set(array[i]).then(() =>{
+    await firebase.firestore().collection(`${nameMonth}_agendamento${date.getFullYear()}_${clinica}`).doc(i < 10 ? `0${i}`: `${i}`).set(array[i]).then(() =>{
    
         response = {
             "type":"sucess",
-            "message": `agenda criada na collection ${nameMonth}_Agendamento${date.getFullYear()}_${clinica}`
+            "message": `agenda criada na collection ${nameMonth}_agendamento${date.getFullYear()}_${clinica}`
         }
 
        
